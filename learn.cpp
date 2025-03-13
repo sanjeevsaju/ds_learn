@@ -1,11 +1,18 @@
 #include <iostream>
-int sum_of_gp(int a, int r, int n) {
-	return (a * (1 - std::pow(r, n)))/(1 - r);
+
+void reverseDigits(int n, int &revNum, int &basePos) {
+	if(n > 0) {
+		reverseDigits(n/10, revNum, basePos);
+		revNum += (n % 10) * basePos;
+		basePos *= 10;
+	}
 }
 
 int main() {
-	//Sum of GP
-	int a = 2, r = 2, n = 15;
-	std::cout<<"Sum of GP is "<<sum_of_gp(a, r, n)<<std::endl;
+	int n = 1234567;
+	int revNum = 0;
+	int basePos = 1;
+	reverseDigits(n, revNum, basePos);
+	std::cout<<"Reversed number using recursion is "<<revNum<<std::endl;
 	return 0;
 }
