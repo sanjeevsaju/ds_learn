@@ -1,20 +1,19 @@
 #include <iostream>
-//Program to find the greatest common divisor of a pair of numbers
-int gcd(int a, int b) {
-	int result = std::min(a, b);
 
-	while(result > 0) {
-		if(a % result == 0 && b % result == 0)
-			break;
-		result--;
+int LCM(int a, int b) {
+	int smallest = std::min(a, b);
+	int largest = std::max(a, b);
+
+	for(int i = largest; ; i += largest){
+		if(i % smallest == 0)
+			return i;
 	}
-
-	return result;
 }
 
 int main(){
 	
-	std::cout<<"GCD of 98 and 56 is "<<gcd(98, 56)<<std::endl;
+	int a = 12, b = 18;
+	std::cout<<"LCM = "<<LCM(a, b)<<std::endl;
 	return 0;
 }
 
