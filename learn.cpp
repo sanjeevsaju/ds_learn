@@ -1,26 +1,20 @@
 #include <iostream>
 
-int factorial(int n) {
+int gcd(int a, int b) {
+	int result = std::min(a, b);
 
-	int res = 1;
-	for(int i = 2; i <= n; i++) {
-		res *= i;
+	while(result > 0) {
+		if(a % result == 0 && b % result == 0)
+			break;
+		result--;
 	}
 
-	return res;
-}
-
-int factorial_recursive(int n) {
-	if(n == 0 || n == 1)
-		return 1;
-	return n * factorial(n - 1);
+	return result;
 }
 
 int main(){
-
-	int n = 15;
-	std::cout<<"Factorial of 15 is "<<factorial(n)<<std::endl;
-
+	
+	std::cout<<"GCD of 98 and 56 is "<<gcd(98, 56)<<std::endl;
 	return 0;
 }
 
