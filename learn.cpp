@@ -1,5 +1,5 @@
 #include <iostream>
-
+//Program to find the greatest common divisor of a pair of numbers
 int gcd(int a, int b) {
 	int result = std::min(a, b);
 
