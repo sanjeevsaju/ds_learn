@@ -1,19 +1,20 @@
 #include <iostream>
+#include <unordered_map>
+int fact(int n) {
+	if(n == 1)
+		return 1;
 
-int LCM(int a, int b) {
-	int smallest = std::min(a, b);
-	int largest = std::max(a, b);
+	return n * fact(n - 1);
+}
 
-	for(int i = largest; ; i += largest){
-		if(i % smallest == 0)
-			return i;
-	}
+int nPr(int n, int r) {
+	return fact(n) / fact(n - r);
 }
 
 int main(){
-	
-	int a = 12, b = 18;
-	std::cout<<"LCM = "<<LCM(a, b)<<std::endl;
+	int n = 6;
+	int r = 3;
+	std::cout<<"nPr = "<<nPr(n, r)<<std::endl;
 	return 0;
 }
 
