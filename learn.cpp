@@ -1,30 +1,21 @@
 #include <iostream>
 #include <vector>
 
-void getAlternateRecur(std::vector<int> &arr, int idx, std::vector<int> &res) {
-	if(idx < arr.size()){
-		res.push_back(arr[idx]);
-		getAlternateRecur(arr, idx + 2, res);
+int largestElement(int arr[], int size) {
+	int largest = -1;
+
+	for(int i = 0; i < size; i++) {
+		if(arr[i] > largest)
+			largest = arr[i];
 	}
-}
 
-std::vector<int> getAlternate(std::vector<int> &arr) {
-	std::vector<int> res;
-	getAlternateRecur(arr, 0, res);
-
-	return res;
-
+	return largest;
 }
 
 int main(){
-	std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-	std::vector<int> res = getAlternate(arr);
-	for(auto e : res) {
-		std::cout<<e<<" ";
-	}
-
-	std::cout<<std::endl;
-
+	int arr[] = {1, 2, 3, 4, 5, 6};
+	int size = sizeof(arr) / sizeof(arr[0]);
+	std::cout<<largest(arr, size)<<std::endl;
 	return 0;
 }
 
