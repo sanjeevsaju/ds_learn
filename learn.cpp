@@ -1,20 +1,30 @@
 #include <iostream>
-//Program to find the greatest common divisor of a pair of numbers
-int gcd(int a, int b) {
-	int result = std::min(a, b);
+#include <vector>
 
-	while(result > 0) {
-		if(a % result == 0 && b % result == 0)
-			break;
-		result--;
+void getAlternateRecur(std::vector<int> &arr, int idx, std::vector<int> &res) {
+	if(idx < arr.size()){
+		res.push_back(arr[idx]);
+		getAlternateRecur(arr, idx + 2, res);
 	}
+}
 
-	return result;
+std::vector<int> getAlternate(std::vector<int> &arr) {
+	std::vector<int> res;
+	getAlternateRecur(arr, 0, res);
+
+	return res;
+
 }
 
 int main(){
-	
-	std::cout<<"GCD of 98 and 56 is "<<gcd(98, 56)<<std::endl;
+	std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	std::vector<int> res = getAlternate(arr);
+	for(auto e : res) {
+		std::cout<<e<<" ";
+	}
+
+	std::cout<<std::endl;
+
 	return 0;
 }
 
