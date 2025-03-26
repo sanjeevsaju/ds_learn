@@ -1,26 +1,24 @@
 #include <iostream>
 #include <vector>
 
-int secondLargestElement(int arr[], int size) {
-	int largest = -1;
-	int secondLargest = -1;
-
-	for(int i = 0; i < size; i++) {
-		if(arr[i] > largest) {
-			secondLargest = largest;
-			largest = arr[i];
-		} else if(arr[i] < largest && arr[i] > secondLargest) {
-			secondLargest = arr[i];
-		}
+void rotateRight(std::vector<int>& arr, int d) {
+	int n = arr.size();
+	for(int i = 1; i <= d; i++) {
+		for(int i = n - 1; i > 0; i--)
+			std::swap(arr[i], arr[i - 1]);
 	}
-
-	return secondLargest;
 }
 
-int main(){
-	int arr[] = {11, 2, 10, 4, 5, 6};
-	int size = sizeof(arr) / sizeof(arr[0]);
-	std::cout<<secondLargestElement(arr, size)<<std::endl;
+int main() {
+
+	std::vector<int> arr = {1, 2, 3, 4};
+	rotateRight(arr, 2);
+
+	for(auto e : arr)
+		std::cout<<e<<" ";
+
+	std::cout<<std::endl;
+
 	return 0;
 }
 
