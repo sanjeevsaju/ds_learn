@@ -1,18 +1,30 @@
 #include <iostream>
 #include <vector>
 
-void rotateRight(std::vector<int>& arr, int d) {
+void moveZeroesToEnd(std::vector<int>& arr) {
+
+	int anchor = 0;
+	int itr = 1;
 	int n = arr.size();
-	for(int i = 1; i <= d; i++) {
-		for(int i = n - 1; i > 0; i--)
-			std::swap(arr[i], arr[i - 1]);
+
+	while(itr != n - 1) {
+		if(arr[anchor] == 0 && arr[itr] != 0){
+			std::swap(arr[anchor], arr[itr]);
+			itr++;
+			anchor++;
+		} else if(arr[anchor] == 0 && arr[itr] == 0) {
+			itr++;
+		}else{
+			itr++;
+			anchor++;
+		}
 	}
 }
 
 int main() {
 
-	std::vector<int> arr = {1, 2, 3, 4};
-	rotateRight(arr, 2);
+	std::vector<int> arr = {0, 1, 2, 0, 4, 3, 0, 5, 0, 0, 0, 7, 0, 0, 0};
+	moveZeroesToEnd(arr);
 
 	for(auto e : arr)
 		std::cout<<e<<" ";
