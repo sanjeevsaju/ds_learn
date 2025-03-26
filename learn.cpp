@@ -1,20 +1,28 @@
 #include <iostream>
-#include <unordered_map>
-int fact(int n) {
-	if(n == 1)
-		return 1;
+#include <vector>
 
-	return n * fact(n - 1);
-}
+int binarySearchIterative(std::vector<int> arr, int low, int high, int x) {
 
-int nPr(int n, int r) {
-	return fact(n) / fact(n - r);
+
+	while(low <= high) {
+		
+		int mid = (high + low) / 2;
+
+		if(arr[mid] == x)
+			return mid;
+		else if(x < arr[mid]) {
+			high = mid - 1;
+		} else {
+			low = mid + 1;
+		}
+	}
+	return -1;
 }
 
 int main(){
-	int n = 6;
-	int r = 3;
-	std::cout<<"nPr = "<<nPr(n, r)<<std::endl;
+	std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8};
+	std::cout<<binarySearchIterative(arr, 0, arr.size() - 1, 3);
+
 	return 0;
 }
 
