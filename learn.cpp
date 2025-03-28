@@ -1,27 +1,29 @@
 #include <iostream>
 #include <vector>
 
-int binarySearchIterative(std::vector<int> arr, int low, int high, int x) {
+int largestSubArray(std::vector<int> arr, int k) {
 
+	int n = arr.size();
+	int maxSum = 0;
 
-	while(low <= high) {
-		
-		int mid = (high + low) / 2;
-
-		if(arr[mid] == x)
-			return mid;
-		else if(x < arr[mid]) {
-			high = mid - 1;
-		} else {
-			low = mid + 1;
-		}
+	for(int i = 0; i < k; i++) {
+		maxSum += arr[i];
 	}
-	return -1;
+
+	int currSum = maxSum;
+	for(int i = 1; i < n - k + 1; i++) {
+		currSum = currSum + arr[i + k - 1] - arr[i - 1];
+		if(currSum > maxSum) maxSum = currSum;
+	}
+		
+	return maxSum;
 }
 
 int main(){
-	std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8};
-	std::cout<<binarySearchIterative(arr, 0, arr.size() - 1, 3);
+
+	std::vector<int> arr = {1, 4, 2, 10, 22, 3, 1, 0, 20};
+	int result = largestSubArray(arr, 4);
+	std::cout<<result<<std::endl;
 
 	return 0;
 }
