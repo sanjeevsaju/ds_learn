@@ -1,45 +1,50 @@
 #include <iostream>
 #include <vector>
 
-int maximumProfitAccumulation(std::vector<int> prices) {
-	int n = prices.size();
-	int res = 0;
+std::vector<int> findThreeElements(std::vector<int> arr) {
+	int n = arr.size();
+
+	std::vector<int> smaller(n, -1);
+	int min = 0;
 
 	for(int i = 1; i < n; i++) {
-		if(prices[i] > prices[i - 1])
-			res += prices[i] - prices[i - 1];
+		if(arr[i] <= arr[min]){
+			min = i;
+		} else {
+			smaller[i] = min;
+		}
 	}
 
-	return res;
-}
+	std::vector<int> greater(n, -1);
+	int max = n - 1;
 
-int maximumProfitMaximaMinima(std::vector<int> arr) {
-	int n = arr.size();
-	int lMin = arr[0];
-	int lMax = arr[0];
-	int i = 0;
-	int res = 0;
-
-	while(i < n) {
-
-		while(i < n && arr[i] >= arr[i + 1]) { i++; }
-		lMin = arr[i];
-
-		while(i < n && arr[i] <= arr[i + 1]) { i++; }
-		lMax = arr[i];
-
-		res += (lMax - lMin);
+	for(int i = n - 2; i >= 0; i--) {
+		if(arr[i] >= arr[max]) {
+			max = i;
+		} else {
+			greater[i] = max;
+		}
 	}
 
-	return res;
+	//No print the elements
+	for(int i = 0; i < n; i++) {
+		if(smaller[i] != -1 && greater[i] != -1) {
+			return {arr[smaller[i]], arr[i], arr[greater[i]]};
+		}
+	}
+
+	return {};
 }
-	
 
 int main() {
 
-	std::vector<int> prices = {100, 180, 260, 310, 40, 535, 695};
-	int maxProfit = maximumProfitAccumulation(prices);
-	std::cout<<maxProfit<<std::endl;
+	std::vector<int> arr = {12, 11, 10, 5, 6, 2, 30};
+	std::vector<int> result = findThreeElements(arr);
+
+	for(int x : result) {
+		std::cout<<x<<" ";
+	}
+	std::cout<<std::endl;
 
 	return 0;
 }
